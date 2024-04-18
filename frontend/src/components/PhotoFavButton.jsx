@@ -4,12 +4,15 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton() {
+  const [like, setLike] = useState('off');
+
+  const handleLike = () => {
+    setLike(like === "on" ? "off" : "on");
+  };
   return (
-    <div className="photo-list__fav-icon">
-      <div className="photo-list__fav-icon-svg">
-        {/* Insert React */}
-      </div>
-    </div>
+    <button onClick={handleLike}>
+      <span className={like === "off" ? "photo-list__fav-icon" : "photo-list__fav-icon-svg"} />
+    </button>
   );
 }
 
