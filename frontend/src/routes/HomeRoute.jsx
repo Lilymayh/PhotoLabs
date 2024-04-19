@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import '../styles/HomeRoute.scss';
 import PhotoList from 'components/PhotoList';
@@ -15,12 +15,12 @@ const HomeRoute = () => {
     }
   };
 
-  const displayAlert = favorites.length > 0;
-  const selected = favorites.length > 0;
+  const isFavPhotoExist = favorites.length > 0;
+
 
   return (
     <div className="home-route">
-      <TopNavigation displayAlert={displayAlert} selected={selected} />
+      <TopNavigation isFavPhotoExist={isFavPhotoExist}/>
       <PhotoList favorites={favorites} toggleFavorite={toggleFavorite} />
     </div>
   );
