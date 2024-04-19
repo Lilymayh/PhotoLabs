@@ -12,12 +12,12 @@ const PhotoListItem = ({ data }) => {
   return (
     <section className="photo-list__item" id={data.id}>
       <PhotoFavButton onClick={handleLike} isLiked={isLiked}/>
-      <img className="photo-list__image" src={data.imageSource} />
+      <img className="photo-list__image" src={data.urls.full} />
       <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={data.profile} />
-        <div className="photo-list__user-info">
-          <span>{data.username}</span>
-          <div className="photo-list__user-location" > {data.location.city}, {data.location.country}</div>
+        <img className="photo-list__user-profile" src={data.user.profile} />
+        <div className="photo-list__user-info"> 
+          <span>{data.user.name}</span>
+          <span className="photo-list__user-location" > {data.location.city}, {data.location.country}</span>
         </div>
       </div>
     </section>
