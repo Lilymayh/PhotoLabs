@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ data }) => {
+const PhotoListItem = ({ data, toggleFavorite, favorite }) => {
   const [isLiked, setIsLiked] = useState();
 
   const handleLike = () => {
@@ -13,7 +13,7 @@ const PhotoListItem = ({ data }) => {
   return (
     <section className="photo-list__item" id={data.id}>
       <PhotoFavButton onClick={handleLike} isLiked={isLiked}/>
-      <img className="photo-list__image" src={data.urls.full} />
+      <img className="photo-list__image" src={data.urls.regular} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={data.user.profile} />
         <div className="photo-list__user-info"> 
