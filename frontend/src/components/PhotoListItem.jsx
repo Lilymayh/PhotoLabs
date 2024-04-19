@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ data }) => {
-  const [isLiked, setIsLiked] = useState(false);
+const PhotoListItem = ({ data, toggleFavorite, favorites }) => {
+  const [isLiked, setIsLiked] = useState(favorites.includes(data.id));
 
   const handleLike = () => {
-    setIsLiked(isLiked === false ? true : false);
+    setIsLiked(!isLiked);
+    toggleFavorite(data.id);
   };
   return (
     <section className="photo-list__item" id={data.id}>

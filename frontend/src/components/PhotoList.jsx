@@ -9,7 +9,7 @@ const PhotoList = () => {
   return (
     <section className="photo-list">
       {photos.map((photo) => (
-        <PhotoListItem key={photo.id} data={photo}/>
+        <PhotoListItem key={photo.id} data={photo} toggleFavorite={toggleFavorite} favorites={favorites}/>
       ))}
     </section>
   );
