@@ -61,7 +61,7 @@ const PhotoList = () => {
   return (
     <section className="photo-list">
       {sampleDataForPhotoList.map((photo) => (
-        <PhotoListItem key={photo.id} photo={photo}/>
+        <PhotoListItem key={photo.id} data={photo}/>
       ))}
     </section>
   );
