@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../styles/TopNavigationBar.scss'
 import TopicList from './TopicList';
-import FavBadge from './FavBadge';
+import FavIcon from './FavIcon';
 
-const TopNavigation = () => {
+const TopNavigation = ( {displayAlert, selected} ) => {
+
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList/>
-      <FavBadge/>
+      <FavIcon displayAlert={displayAlert} selected={selected}/>
     </div>
   )
 }

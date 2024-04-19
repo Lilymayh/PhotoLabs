@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
 import photos from "../mocks/photos"
 
 
-const PhotoList = () => {
+const PhotoList = ( {favorites, toggleFavorite} ) => {
   return (
     <section className="photo-list">
       {photos.map((photo) => (
