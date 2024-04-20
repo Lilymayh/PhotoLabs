@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ data, toggleFavorite, favorites, setDisplayModal }) => {
+const PhotoListItem = ({ data, toggleFavorite, favorites, onClick }) => {
   const [isLiked, setIsLiked] = useState();
 
   const handleLike = () => {
@@ -11,14 +11,14 @@ const PhotoListItem = ({ data, toggleFavorite, favorites, setDisplayModal }) => 
     toggleFavorite(data.id);
   };
 
-  const handleClick = () => {
-    setDisplayModal(true);
-  };
+  const handleImageClick = () => {
+    onClick();
+  }
 
   return (
-    <section onClick={handleClick} className="photo-list__item" id={data.id}>
+    <section className="photo-list__item" id={data.id}>
       <PhotoFavButton onClick={handleLike} isLiked={isLiked}/>
-      <img className="photo-list__image" src={data.urls.regular}/>
+      <img className="photo-list__image" src={data.urls.regular} onClick={handleImageClick}/>
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={data.user.profile} />
         <div className="photo-list__user-info"> 

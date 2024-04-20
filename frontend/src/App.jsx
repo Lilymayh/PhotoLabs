@@ -5,11 +5,13 @@ import './App.scss';
 import TopNavigation from './components/TopNavigationBar'
 
 const App = () => {
+  const [displayModal, setDisplayModal] = useState(false);
 
   return (
     <div className="App">
       <TopNavigation />
-      <PhotoList />
+      <PhotoList setDisplayModal={setDisplayModal} />
+      {displayModal && <Modal />} 
     </div>
   );
 };

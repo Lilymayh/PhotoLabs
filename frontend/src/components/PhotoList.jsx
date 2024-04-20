@@ -7,6 +7,10 @@ import photos from "../mocks/photos"
 
 
 const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
+  
+  const handleClick = () => {
+    setDisplayModal(true);
+  };
 
   return (
     <section className="photo-list">
@@ -15,7 +19,7 @@ const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
         data={photo} 
         toggleFavorite={toggleFavorite} 
         favorites={favorites}
-        setDisplayModal={setDisplayModal}/>
+        onClick={handleClick}/>
       ))}
       <Modal />
     </section>
