@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-
-import Modal from "../routes/PhotoDetailsModal";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
 import photos from "../mocks/photos"
 
 
 const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
-  
+
   const handleClick = () => {
     setDisplayModal(true);
   };
@@ -21,7 +19,6 @@ const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
         favorites={favorites}
         onClick={handleClick}/>
       ))}
-      <Modal />
     </section>
   );
 };
