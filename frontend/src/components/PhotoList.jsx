@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 
+import Modal from "../routes/PhotoDetailsModal";
 import "../styles/PhotoList.scss";
-import Modal from "../routes/PhotoDetailsModal"
 import PhotoListItem from "../components/PhotoListItem";
 import photos from "../mocks/photos"
 
 
-const PhotoList = ( {favorites, toggleFavorite} ) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
 
   return (
     <section className="photo-list">
       {photos.map((photo) => (
-        <PhotoListItem key={photo.id} onClick={openModal} data={photo} toggleFavorite={toggleFavorite} favorites={favorites}/>
+        <PhotoListItem key={photo.id} 
+        data={photo} 
+        toggleFavorite={toggleFavorite} 
+        favorites={favorites}
+        setDisplayModal={setDisplayModal}/>
       ))}
-      <Modal isOpen={isModalOpen}/>
+      <Modal />
     </section>
   );
 };

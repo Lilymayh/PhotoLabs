@@ -3,17 +3,22 @@ import React, { useState } from 'react';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ data, toggleFavorite, favorite }) => {
+const PhotoListItem = ({ data, toggleFavorite, favorites, setDisplayModal }) => {
   const [isLiked, setIsLiked] = useState();
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     toggleFavorite(data.id);
   };
+
+  const handleClick = () => {
+    setDisplayModal(true);
+  };
+
   return (
-    <section className="photo-list__item" id={data.id}>
+    <section onClick={handleClick} className="photo-list__item" id={data.id}>
       <PhotoFavButton onClick={handleLike} isLiked={isLiked}/>
-      <img className="photo-list__image" src={data.urls.regular} />
+      <img className="photo-list__image" src={data.urls.regular}/>
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={data.user.profile} />
         <div className="photo-list__user-info"> 

@@ -6,6 +6,8 @@ import TopNavigation from 'components/TopNavigationBar';
 
 const HomeRoute = () => {
   const [favorites, setFavorites] = useState([]);
+  const [displayModal, setDisplayModal] = useState(false);
+
 
   const toggleFavorite = (photoId) => {
     if (favorites.includes(photoId)) {
@@ -21,7 +23,9 @@ const HomeRoute = () => {
   return (
     <div className="home-route">
       <TopNavigation isFavPhotoExist={isFavPhotoExist}/>
-      <PhotoList favorites={favorites} toggleFavorite={toggleFavorite} />
+      <PhotoList favorites={favorites} 
+      toggleFavorite={toggleFavorite}
+      setDisplayModal={setDisplayModal}/>
     </div>
   );
 };
