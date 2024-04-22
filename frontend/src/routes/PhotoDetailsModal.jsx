@@ -6,7 +6,7 @@ import PhotoList from '../components/PhotoList';
 import FavIcon from '../components/FavIcon';
 
 
-const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, toggleFavorite, isFavorite }) => {
+const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, favorites, toggleFavorite }) => {
   const handleCloseClick = () => {
     onClose(); 
   }
@@ -17,8 +17,12 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, toggleFav
   : [];
 
   const handleLike = () => {
-    toggleFavorite(!isFavorite);
+    toggleFavorite(selectedPhoto.id); // Passes the photo ID to toggleFavorite
   };
+  
+
+  // Check if the selected photo ID is in the favorites array
+  const isSelectedPhotoFavorite = favorites.includes(selectedPhoto.id);
 
   return (
     <div className="photo-details-modal">
@@ -34,7 +38,7 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, toggleFav
         <div className="photo-details-modal__images">
         <PhotoList photos={similarPhotos}/>
       </div>
-      <FavIcon onClick={handleLike} selected={isFavorite} />
+      <FavIcon onClick={handleLike} selected={isSelectedPhotoFavorite} />
     </div>
   )
 };
