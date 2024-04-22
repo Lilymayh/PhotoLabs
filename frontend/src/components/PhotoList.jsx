@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
-import photos from "../mocks/photos"
+import photos from '../mocks/photos'
 
 
-const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
+const PhotoList = ({ favorites, toggleFavorite, setSelectedPhoto, setDisplayModal }) => {
+  const groupPhotosByLocation = (photos) => {
+    const photosByLocation = {};
+    photos.forEach(photo => {
+      const locationKey = `${photo.location.city}, ${photo.location.country}`;
+      if (!photosByLocation[locationKey]) {
+        photosByLocation[locationKey] = [];
+      }
+      photosByLocation[locationKey].push(photo);
+    });
+    return photosByLocation;
+  };
 
-  const handleClick = () => {
+  const photosByLocation = groupPhotosByLocation(photos);
+
+  const handleClick = (photo) => {
+    setSelectedPhoto(photo)
     setDisplayModal(true);
   };
 
@@ -17,7 +31,9 @@ const PhotoList = ( {favorites, toggleFavorite, setDisplayModal} ) => {
         data={photo} 
         toggleFavorite={toggleFavorite} 
         favorites={favorites}
-        onClick={handleClick}/>
+        onClick={handleClick}
+        photosByLocation={photosByLocation}
+        />
       ))}
     </section>
   );
