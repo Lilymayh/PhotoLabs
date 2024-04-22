@@ -2,10 +2,11 @@ import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
-import PhotoList from '../components/PhotoList'
+import PhotoList from '../components/PhotoList';
+import FavIcon from '../components/FavIcon';
 
 
-const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation }) => {
+const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, toggleFavorite, isFavorite }) => {
   const handleCloseClick = () => {
     onClose(); 
   }
@@ -15,6 +16,9 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation }) => {
   ? photosByLocation[locationKey]
   : [];
 
+  const handleLike = () => {
+    toggleFavorite(!isFavorite);
+  };
 
   return (
     <div className="photo-details-modal">
@@ -28,8 +32,9 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation }) => {
           <span> {selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
         </div>
         <div className="photo-details-modal__images">
-        <PhotoList photos={similarPhotos} />
+        <PhotoList photos={similarPhotos}/>
       </div>
+      <FavIcon onClick={handleLike} selected={isFavorite} />
     </div>
   )
 };
