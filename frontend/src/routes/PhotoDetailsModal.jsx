@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
+import PhotoList from '../components/PhotoList'
 
 
 const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation }) => {
@@ -27,14 +28,8 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation }) => {
           <span> {selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
         </div>
         <div className="photo-details-modal__images">
-        {similarPhotos.length > 0 ? (
-        similarPhotos.map(photo => (
-          <img key={photo.id} src={photo.urls.regular} />
-        ))
-      ) : (
-        <p>No similar photos found.</p>
-      )}
-        </div>
+        <PhotoList photos={similarPhotos} />
+      </div>
     </div>
   )
 };

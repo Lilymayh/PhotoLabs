@@ -4,21 +4,7 @@ import PhotoListItem from "../components/PhotoListItem";
 import photos from '../mocks/photos'
 
 
-const PhotoList = ({ favorites, toggleFavorite, setSelectedPhoto, setDisplayModal }) => {
-  const groupPhotosByLocation = (photos) => {
-    const photosByLocation = {};
-    photos.forEach(photo => {
-      const locationKey = `${photo.location.city}, ${photo.location.country}`;
-      if (!photosByLocation[locationKey]) {
-        photosByLocation[locationKey] = [];
-      }
-      photosByLocation[locationKey].push(photo);
-    });
-    return photosByLocation;
-  };
-
-  const photosByLocation = groupPhotosByLocation(photos);
-
+const PhotoList = ({ favorites, toggleFavorite, setSelectedPhoto, setDisplayModal, similarPhotos }) => {
   const handleClick = (photo) => {
     setSelectedPhoto(photo)
     setDisplayModal(true);
@@ -26,15 +12,15 @@ const PhotoList = ({ favorites, toggleFavorite, setSelectedPhoto, setDisplayModa
 
   return (
     <section className="photo-list">
-      {photos.map((photo) => (
-        <PhotoListItem key={photo.id} 
-        data={photo} 
-        toggleFavorite={toggleFavorite} 
-        favorites={favorites}
-        onClick={handleClick}
-        photosByLocation={photosByLocation}
-        />
-      ))}
+     {photos.map((photo) => (
+          <PhotoListItem
+            key={photo.id}
+            data={photo}
+            toggleFavorite={toggleFavorite}
+            favorites={favorites}
+            onClick={handleClick}
+          />
+        ))}
     </section>
   );
 };

@@ -7,6 +7,7 @@ import TopNavigation from './components/TopNavigationBar'
 const App = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [similarPhotos, setSimilarPhotos] = useState([]);
 
 
   const handleCloseModal = () => {
@@ -17,7 +18,7 @@ const App = () => {
   return (
     <div className="App">
       <TopNavigation />
-      <PhotoList setDisplayModal={setDisplayModal} setSelectedPhoto={setSelectedPhoto}/>
+      <PhotoList setDisplayModal={setDisplayModal} setSelectedPhoto={setSelectedPhoto} similarPhotos={similarPhotos}/>
       {displayModal && selectedPhoto && 
       <Modal onClose={handleCloseModal} selectedPhoto={selectedPhoto}/>} 
     </div>
