@@ -3,21 +3,19 @@ import React, { useState } from 'react';
 import '../styles/HomeRoute.scss';
 import PhotoList from 'components/PhotoList';
 import TopNavigation from 'components/TopNavigationBar';
-
-const HomeRoute = ({ favorites, toggleFavorite }) => {
-  const [displayModal, setDisplayModal] = useState(false);
+import useApplicationData from '../hooks/useApplicationData';
 
 
-  const isFavPhotoExist = favorites.length > 0;
-
+const HomeRoute = () => {
+  const { state, toggleFavorites } = useApplicationData();
+  const { favorites } = state;
 
   return (
     <div className="home-route">
-      <TopNavigation isFavPhotoExist={isFavPhotoExist}/>
+      <TopNavigation isFavPhotoExist={favorites.length > 0}/>
       <PhotoList
-      setDisplayModal={setDisplayModal}
       favorites={favorites} 
-      toggleFavorite={toggleFavorite}/>
+      toggleFavorite={toggleFavorites} />
     </div>
   );
 };

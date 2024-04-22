@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
 import photos from '../mocks/photos'
+import useApplicationData from '../hooks/useApplicationData'
 
 
-const PhotoList = ({ favorites, toggleFavorite, setSelectedPhoto, setDisplayModal, similarPhotos }) => {
+const PhotoList = ({ photos }) => {
+  const { state, updateToFavPhotoIds, setPhotoSelected, onClosePhotoDetailsModal } = useApplicationData();
+  const { favorites, similarPhotos, displayModal, selectedPhoto } = state;
+
   const handleClick = (photo) => {
     setSelectedPhoto(photo)
     setDisplayModal(true);

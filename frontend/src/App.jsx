@@ -3,45 +3,36 @@ import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import PhotoList from './components/PhotoList';
 import './App.scss';
 import TopNavigation from './components/TopNavigationBar';
+import useApplicationData from './hooks/useApplicationData';
+
 
 const App = () => {
-  const [displayModal, setDisplayModal] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [similarPhotos, setSimilarPhotos] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const {
+    state,
+    toggleFavorites,
+    setPhotoSelected,
+    onClosePhotoDetailsModal
+  } = useApplicationData();
 
-
-  const handleCloseModal = () => {
-    setDisplayModal(false);
-    setSelectedPhoto(null);
-    setSimilarPhotos([]);
-  };
-
-  const toggleFavorite = (photoId) => {
-    if (favorites.includes(photoId)) {
-      setFavorites(favorites.filter(id => id !== photoId)); // Remove photoId from favorites
-    } else {
-      setFavorites([...favorites, photoId]); // Add photoId to favorites
-    }
-  };
-
+  const { displayModal, selectedPhoto, similarPhotos, favorites } = state;
 
   return (
     <div className="App">
       <TopNavigation />
-      <PhotoList setDisplayModal={setDisplayModal}
-        setSelectedPhoto={setSelectedPhoto}
+      <PhotoList
+        setDisplayModal={setDisplayModal}
+        setSelectedPhoto={setPhotoSelected}
         similarPhotos={similarPhotos}
         favorites={favorites}
-        toggleFavorite={toggleFavorite}
+        toggleFavorite={toggleFavorites}
       />
       {displayModal && selectedPhoto &&
         <PhotoDetailsModal
-          onClose={handleCloseModal}
+          onClose={onClosePhotoDetailsModal}
           selectedPhoto={selectedPhoto}
           photosByLocation={similarPhotos}
           favorites={favorites}
-          toggleFavorite={toggleFavorite}
+          toggleFavorite={toggleFavorites}
         />
       }
     </div>

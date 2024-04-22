@@ -4,6 +4,7 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 import FavIcon from '../components/FavIcon';
+import useApplicationData from '../hooks/useApplicationData'
 
 
 const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, favorites, toggleFavorite }) => {
