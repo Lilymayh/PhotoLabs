@@ -16,8 +16,10 @@ const PhotoListItem = ({ data, toggleFavorite, favorites, onClick }) => {
 
   return (
     <section className="photo-list__item" id={data.id} onClick={handleClick}>
+      <div className="photo-list__image-container">
       <PhotoFavButton onClick={handleLike} isLiked={isLiked}/>
       <img className="photo-list__image" src={data.urls.regular} />
+      </div>
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={data.user.profile} />
         <div className="photo-list__user-info"> 
