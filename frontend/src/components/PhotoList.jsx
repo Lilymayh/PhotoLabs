@@ -4,7 +4,6 @@ import PhotoListItem from "../components/PhotoListItem";
 
 
 const PhotoList = ({ setPhotoSelected, handleLike, favorites, photos }) => {
-
   return (
     <section className="photo-list">
       {photos.map((photo) => (

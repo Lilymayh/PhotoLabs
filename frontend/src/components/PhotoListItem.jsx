@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import useApplicationData from '../hooks/useApplicationData';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo, setPhotoSelected, handleLike, favorites }) => {
 
   const openModal= () => {
+    console.log("Clicked"); 
     setPhotoSelected(photo);
   };
 

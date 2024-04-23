@@ -2,12 +2,12 @@ import React from "react";
 
 import "../styles/TopicList.scss";
 import TopicListItem from '../components/TopicListItem';
-import topics from '../mocks/topics.js';
 
-const TopicList = () => {
+const TopicList = ({ topicData }) => {
+  console.log("Received topicData:", topicData);
   return (
     <div className="top-nav-bar__topic-list">
-      {topics.map((topic) => (
+      {topicData.map((topic) => (
         <TopicListItem key={topic.id} title={topic.title} />
       ))}
     </div>

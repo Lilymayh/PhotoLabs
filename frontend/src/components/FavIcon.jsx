@@ -1,8 +1,7 @@
 import React, { useState} from 'react';
 
-const FavIcon = ({displayAlert, selected, onClick, isFavPhotoExist }) => {
+const FavIcon = ({displayAlert, selected, isFavPhotoExist }) => {
   const handleNotif = () => {
-    onClick();
     if (displayAlert) {
       alert;
     }

@@ -11,6 +11,8 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto, similarPhotos, favorites, h
     onClose(); 
   }
   
+  console.log("Props in PhotoDetailsModal:", { onClose, selectedPhoto, similarPhotos, favorites, handleLike });
+
 
   const isSelectedPhotoFavorite = favorites.includes(selectedPhoto.id);
 
@@ -25,11 +27,11 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto, similarPhotos, favorites, h
           <span>{selectedPhoto.user.name}</span>
           <span> {selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
         </div>
-        <div className="photo-details-modal__images">
+        {/* <div className="photo-details-modal__images">
           {similarPhotos.map(photo => (
              <img key={photo.id} src={photo.similar_photos} alt={`Similar photo ${photo.id}`} />
           ))}
-      </div>
+      </div> */}
       <PhotoFavButton onClick={() => handleLike(selectedPhoto.id)} isLiked={isSelectedPhotoFavorite} />
     </div>
   )
