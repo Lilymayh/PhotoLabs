@@ -9,6 +9,7 @@ const useApplicationData = () => {
     photos: mockPhotos,
     topics: mockTopics,
     favorites: [],
+    isFavPhotoExist: false,
   };
 
   const reducer = (state, action) => {
@@ -18,7 +19,17 @@ const useApplicationData = () => {
       case 'CLOSE_MODAL':
         return { ...state, displayModal: false, selectedPhoto: null };
       case 'TOGGLE_LIKE':
-        return { ...state, favorites: toggleFavorite(state.favorites, action.payload) };
+        // const photoId = action.payload;
+        // const updatedFavorites = state.favorites.includes(photoId)
+        //   ? state.favorites.filter(id => id !== photoId) // Remove from favorites if already liked
+        //   : [...state.favorites, photoId]; 
+        // return { ...state, favorites: updatedFavorites };
+        const photoId = action.payload;
+        const updatedFavorites = state.favorites.includes(photoId)
+          ? state.favorites.filter(id => id !== photoId)
+          : [...state.favorites, photoId];
+        const isFavPhotoExist = updatedFavorites.length > 0;
+        return { ...state, favorites: updatedFavorites, isFavPhotoExist };
       default:
         return state;
     }
@@ -38,15 +49,15 @@ const useApplicationData = () => {
     dispatch({ type: 'TOGGLE_LIKE', payload: photoId });
   };
 
-  const similarPhotos = state.selectedPhoto
-    ? state.photos.filter(photo => state.selectedPhoto.similar_photos?.includes(photo.id))
+  const similarPhotos = state.selectedPhoto && state.selectedPhoto.similar_photos
+    ? state.photos.filter(photo => Object.values(state.selectedPhoto.similar_photos).includes(photo.id))
     : [];
 
 
   return {
     state,
-    selectedPhoto,
     similarPhotos,
+    isFavPhotoExist: state.isFavPhotoExist,
     setPhotoSelected,
     onClosePhotoDetailsModal: handleCloseModal,
     handleLike,
@@ -54,3 +65,4 @@ const useApplicationData = () => {
 };
 
 export default useApplicationData;
+

@@ -6,12 +6,12 @@ import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo, setPhotoSelected, handleLike, favorites }) => {
 
-  const handleClick = () => {
+  const openModal= () => {
     setPhotoSelected(photo);
   };
 
   return (
-    <section className="photo-list__item" id={photo.id} onClick={handleClick}>
+    <section className="photo-list__item" id={photo.id} onClick={openModal}>
       <div className="photo-list__image-container">
       <PhotoFavButton onClick={() => handleLike(photo.id)} isLiked={favorites.includes(photo.id)}/>
       <img className="photo-list__image" src={photo.urls.regular} />

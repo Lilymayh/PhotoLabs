@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <TopNavigation />
+      <TopNavigation isFavPhotoExist={state.isFavPhotoExist} />
       <PhotoList
         photos={state.photos}
         setPhotoSelected={setPhotoSelected}
@@ -28,7 +28,7 @@ const App = () => {
       {selectedPhoto &&
         <PhotoDetailsModal
           onClose={onClosePhotoDetailsModal}
-          selectedPhoto={selectedPhoto}
+          setPhotoSelected={setPhotoSelected}
           similarPhotos={similarPhotos}
           favorites={state.favorites}
           handleLike={handleLike}

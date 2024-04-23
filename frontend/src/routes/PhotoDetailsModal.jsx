@@ -27,7 +27,7 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto, similarPhotos, favorites, h
         </div>
         <div className="photo-details-modal__images">
           {similarPhotos.map(photo => (
-            <img key={photo.id} src={photo.url} alt={photo.similar_photos} />
+             <img key={photo.id} src={photo.similar_photos} alt={`Similar photo ${photo.id}`} />
           ))}
       </div>
       <PhotoFavButton onClick={() => handleLike(selectedPhoto.id)} isLiked={isSelectedPhotoFavorite} />

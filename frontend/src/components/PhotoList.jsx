@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
-import useApplicationData from '../hooks/useApplicationData';
 
 
 const PhotoList = ({ setPhotoSelected, handleLike, favorites, photos }) => {

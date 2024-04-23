@@ -14,8 +14,7 @@ const HomeRoute = () => {
     <div className="home-route">
       <TopNavigation isFavPhotoExist={favorites.length > 0}/>
       <PhotoList
-      favorites={favorites} 
-      toggleFavorite={toggleFavorites} />
+      favorites={favorites} />
     </div>
   );
 };
