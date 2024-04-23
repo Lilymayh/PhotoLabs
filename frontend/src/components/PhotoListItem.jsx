@@ -4,33 +4,23 @@ import useApplicationData from '../hooks/useApplicationData';
 import PhotoFavButton from "../components/PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ data, onClick }) => {
-  const { state, updateToFavPhotoIds } = useApplicationData();
-  const { favorites: appFavorites } = state;
+const PhotoListItem = ({ photo, setPhotoSelected, handleLike, favorites }) => {
 
-
-  const handleLike = () => {
-    if (appFavorites.includes(data.id)) {
-      updateToFavPhotoIds(appFavorites.filter(id => id !== data.id));
-    } else {
-      updateToFavPhotoIds([...appFavorites, data.id]);
-    }
-  };
   const handleClick = () => {
-    onClick(data);
-  }
+    setPhotoSelected(photo);
+  };
 
   return (
-    <section className="photo-list__item" id={data.id} onClick={handleClick}>
+    <section className="photo-list__item" id={photo.id} onClick={handleClick}>
       <div className="photo-list__image-container">
-      <PhotoFavButton onClick={handleLike} isLiked={appFavorites.includes(data.id)}/>
-      <img className="photo-list__image" src={data.urls.regular} />
+      <PhotoFavButton onClick={() => handleLike(photo.id)} isLiked={favorites.includes(photo.id)}/>
+      <img className="photo-list__image" src={photo.urls.regular} />
       </div>
       <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={data.user.profile} />
+        <img className="photo-list__user-profile" src={photo.user.profile} />
         <div className="photo-list__user-info"> 
-          <span>{data.user.name}</span>
-          <span className="photo-list__user-location" > {data.location.city}, {data.location.country}</span>
+          <span>{photo.user.name}</span>
+          <span className="photo-list__user-location" > {photo.location.city}, {photo.location.country}</span>
         </div>
       </div>
     </section>

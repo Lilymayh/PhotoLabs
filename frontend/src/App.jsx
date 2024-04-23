@@ -9,30 +9,29 @@ import useApplicationData from './hooks/useApplicationData';
 const App = () => {
   const {
     state,
-    toggleFavorites,
+    selectedPhoto,
+    similarPhotos,
+    handleLike,
     setPhotoSelected,
     onClosePhotoDetailsModal
   } = useApplicationData();
-
-  const { displayModal, selectedPhoto, similarPhotos, favorites } = state;
 
   return (
     <div className="App">
       <TopNavigation />
       <PhotoList
-        setDisplayModal={setDisplayModal}
-        setSelectedPhoto={setPhotoSelected}
-        similarPhotos={similarPhotos}
-        favorites={favorites}
-        toggleFavorite={toggleFavorites}
+        photos={state.photos}
+        setPhotoSelected={setPhotoSelected}
+        favorites={state.favorites}
+        handleLike={handleLike}
       />
-      {displayModal && selectedPhoto &&
+      {selectedPhoto &&
         <PhotoDetailsModal
           onClose={onClosePhotoDetailsModal}
           selectedPhoto={selectedPhoto}
-          photosByLocation={similarPhotos}
-          favorites={favorites}
-          toggleFavorite={toggleFavorites}
+          similarPhotos={similarPhotos}
+          favorites={state.favorites}
+          handleLike={handleLike}
         />
       }
     </div>

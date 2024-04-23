@@ -1,15 +1,16 @@
 .photo-list__fav-icon {
   position: absolute;
+  border: none;
   top: 16px;
   left: 16px;
-  padding: 4px;
   cursor: pointer;
   margin-bottom: 20px;
-  border-width: 0.1px;
   background-color: white;
-  width: 36px;
-  height: 36px;
-  text-align: center;
+  width: 37px;
+  height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 100%;
 }
 

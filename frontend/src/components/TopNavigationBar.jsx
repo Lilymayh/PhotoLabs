@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import '../styles/TopNavigationBar.scss'
 import TopicList from './TopicList';
 import FavBadge from './FavBadge';
-import homeroute from '../routes/HomeRoute';
 
 
 const TopNavigation = ( {isFavPhotoExist} ) => {

@@ -3,23 +3,13 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
-import FavIcon from '../components/FavIcon';
-import useApplicationData from '../hooks/useApplicationData'
+import PhotoFavButton from '../components/PhotoFavButton';
 
 
-const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, favorites, toggleFavorite }) => {
+const PhotoDetailsModal = ({ onClose, selectedPhoto, similarPhotos, favorites, handleLike }) => {
   const handleCloseClick = () => {
     onClose(); 
   }
-
-  const locationKey = selectedPhoto.location ? `${selectedPhoto.location.city}, ${selectedPhoto.location.country}` : '';
-  const similarPhotos = photosByLocation && photosByLocation[locationKey]
-  ? photosByLocation[locationKey]
-  : [];
-
-  const handleLike = () => {
-    toggleFavorite(selectedPhoto.id); 
-  };
   
 
   const isSelectedPhotoFavorite = favorites.includes(selectedPhoto.id);
@@ -36,10 +26,11 @@ const PhotoDetailsModal = ({ selectedPhoto, onClose, photosByLocation, favorites
           <span> {selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
         </div>
         <div className="photo-details-modal__images">
-        <PhotoList photos={similarPhotos} favorites={favorites} 
-      toggleFavorite={toggleFavorite}/>
+          {similarPhotos.map(photo => (
+            <img key={photo.id} src={photo.url} alt={photo.similar_photos} />
+          ))}
       </div>
-      <FavIcon onClick={handleLike} selected={isSelectedPhotoFavorite} />
+      <PhotoFavButton onClick={() => handleLike(selectedPhoto.id)} isLiked={isSelectedPhotoFavorite} />
     </div>
   )
 };
