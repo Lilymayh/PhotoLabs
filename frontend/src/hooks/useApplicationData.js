@@ -38,14 +38,6 @@ const useApplicationData = () => {
     dispatch({ type: 'TOGGLE_LIKE', payload: photoId });
   };
 
-  const toggleFavorite = (photo) => {
-    if (favorites.includes(photo.id)) {
-      setFavorites(favorites.filter(id => id !== photo));
-    } else {
-      setFavorites([...favorites, photo]);
-    }
-  };
-
   const similarPhotos = state.selectedPhoto
     ? state.photos.filter(photo => state.selectedPhoto.similar_photos?.includes(photo.id))
     : [];
@@ -53,7 +45,7 @@ const useApplicationData = () => {
 
   return {
     state,
-    selectedPhoto: state.selectedPhoto,
+    selectedPhoto,
     similarPhotos,
     setPhotoSelected,
     onClosePhotoDetailsModal: handleCloseModal,
