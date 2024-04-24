@@ -7,9 +7,9 @@ PhotoLabs is a SPA that allows users to like photos, click on an image to open a
 
 # Screenshots
 
-!["Screenshot of PhotoLab's initial state"](https://github.com/Lilymayh/tinyapp/blob/main/docs/urls_main_page.png?raw=true)
-!["Screenshot of tinyapp's main page"](https://github.com/Lilymayh/tinyapp/blob/main/docs/urls_main_page.png?raw=true)
-!["Screenshot of tinyapp's main page"](https://github.com/Lilymayh/tinyapp/blob/main/docs/urls_main_page.png?raw=true)
+!["Screenshot of PhotoLabs' initial state"](https://raw.githubusercontent.com/Lilymayh/PhotoLabs/86023f736d7169dd099d7a4d0b9e2730db15e068/docs/initital_state.png)
+!["Screenshot of open modal"](https://raw.githubusercontent.com/Lilymayh/PhotoLabs/86023f736d7169dd099d7a4d0b9e2730db15e068/docs/modal.png)
+!["Screenshot of a selected topic"](https://raw.githubusercontent.com/Lilymayh/PhotoLabs/86023f736d7169dd099d7a4d0b9e2730db15e068/docs/photo_topic.png)
 
 ## Setup
 
