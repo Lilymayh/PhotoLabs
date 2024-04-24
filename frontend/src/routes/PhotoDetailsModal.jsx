@@ -1,40 +1,42 @@
 import React from 'react';
 
-import '../styles/PhotoDetailsModal.scss'
+import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
-import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
+import PhotoList from '../components/PhotoList';
 
 
-const PhotoDetailsModal = ({ onClose, selectedPhoto, similarPhotos, favorites, handleLike }) => {
+const PhotoDetailsModal = ({ photo, onClose, similarPhotos, favorites, handleLike }) => {
   const handleCloseClick = () => {
-    onClose(); 
-  }
-  
-  console.log("Props in PhotoDetailsModal:", { onClose, selectedPhoto, similarPhotos, favorites, handleLike });
-
-
-  const isSelectedPhotoFavorite = favorites.includes(selectedPhoto.id);
-
+    onClose();
+  };
+  const isSelectedPhotoFavorite = photo && favorites.includes(photo.id);
   return (
     <div className="photo-details-modal">
-       <button className="photo-details-modal__close-button" onClick={handleCloseClick}>
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
-      <img className="photo-details-modal__image" src={selectedPhoto.urls.full}/>
-      <div className="photo-list__user-info"> 
-      <img className="photo-list__user-profile" src={selectedPhoto.user.profile} />
-          <span>{selectedPhoto.user.name}</span>
-          <span> {selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
+      <div >
+        <button className="photo-details-modal__close-button" onClick={handleCloseClick}>
+          <img src={closeSymbol} alt="close symbol" />
+        </button>
+      </div>
+      <div className="photo-details-modal_conatainer">
+      <img className="photo-details-modal__image" src={photo.urls.full} />
+        <PhotoFavButton onClick={() => handleLike(photo.id)} isLiked={isSelectedPhotoFavorite} />
+      <div className="photo-details-modal__photographer-info">
+        <img className="photo-details-modal__photographer-profile" src={photo.user.profile} />
+        <div className="photo-details-modal__photographer-info-right">
+        <span className="photo-details-modal__photographer-details">{photo.user.name}</span>
+        <span className="photo-details-modal__photographer-location"> {photo.location.city}, {photo.location.country}</span>
         </div>
-        {/* <div className="photo-details-modal__images">
-          {similarPhotos.map(photo => (
-             <img key={photo.id} src={photo.similar_photos} alt={`Similar photo ${photo.id}`} />
-          ))}
-      </div> */}
-      <PhotoFavButton onClick={() => handleLike(selectedPhoto.id)} isLiked={isSelectedPhotoFavorite} />
+      </div>
+      </div>
+      <div className="photo-details-modal__images">
+        <PhotoList photos={photo.similar_photos}
+          favorites={favorites}
+          handleLike={handleLike} 
+        isSelectedPhotoFavorite={isSelectedPhotoFavorite} />
+      </div>
     </div>
-  )
+  );
 };
 
 export default PhotoDetailsModal;

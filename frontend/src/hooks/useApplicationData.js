@@ -19,13 +19,12 @@ const useApplicationData = () => {
       case 'SET_PHOTO_DATA':
         return { ...state, photoData: action.payload };
       case 'SET_PHOTOS_BY_TOPIC':
-        console.log(action.payload)
         return { ...state, photoData: action.payload.photos };
       case 'SET_TOPIC_DATA':
         return { ...state, topicData: action.payload };
       case 'OPEN_MODAL':
         return { ...state, displayModal: true, selectedPhoto: action.payload };
-      case 'CLOSE_MODAL':
+        case 'CLOSE_MODAL':
         return { ...state, displayModal: false, selectedPhoto: null };
       case 'TOGGLE_LIKE':
         const photoId = action.payload;
@@ -63,13 +62,14 @@ const useApplicationData = () => {
     }
   }, [state.selectedTopicId]);
 
-  const setPhotoSelected = (photo) => {
-    console.log("Selected photo:", photo);
-    dispatch({ type: 'OPEN_MODAL', payload: photo });
+  const handleOpenModal = (photoId) => {
+    console.log("Photo ID:", photoId);
+    const selectedPhoto = state.photoData.find(photo => photo.id === photoId);
+    console.log("Selected: ", selectedPhoto);
+    dispatch({ type: 'OPEN_MODAL', payload: selectedPhoto });
   };
 
   const handleCloseModal = () => {
-    console.log("Closing modal");
     dispatch({ type: 'CLOSE_MODAL' });
   };
 
@@ -90,17 +90,18 @@ const useApplicationData = () => {
   const similarPhotos = state.selectedPhoto && state.selectedPhoto.similar_photos
     ? state.photoData.filter(photo => Object.values(state.selectedPhoto.similar_photos).includes(photo.id))
     : [];
-
+  
 
   return {
     state,
     similarPhotos,
+    selectedPhoto: state.selectedPhoto,
     isFavPhotoExist: state.isFavPhotoExist,
     displayModal: state.displayModal,
     selectedTopicId: state.selectedTopicId,
+    handleOpenModal,
     fetchPhotosByTopic,
-    setPhotoSelected,
-    onClosePhotoDetailsModal: handleCloseModal,
+    handleCloseModal,
     handleLike,
   };
 };

@@ -32,6 +32,12 @@
 .photo-details-modal__image {
   max-width: 95%;
   border-radius: 8px;
+  margin-top: 5px;
+}
+
+.photo-details-modal_conatainer {
+  position: relative;
+  margin-left: 2.5vw;
 }
 
 .photo-details-modal__top-bar {
@@ -70,8 +76,15 @@
 }
 
 .photo-details-modal__photographer-info {
-  margin-top: 5px;
+  margin-top: 10px;
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.photo-details-modal__photographer-info-right {
+  display: flex;
+  flex-direction: column;
 }

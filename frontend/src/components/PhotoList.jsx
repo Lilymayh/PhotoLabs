@@ -3,9 +3,8 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "../components/PhotoListItem";
 
 
-const PhotoList = ({ setPhotoSelected, handleLike, favorites, photos }) => {
+const PhotoList = ({ setPhotoSelected, handleLike, favorites, photos, handleOpenModal }) => {
 
-  console.log(photos)
   return (
     <section className="photo-list">
       {photos.map((photo) => (
@@ -15,6 +14,7 @@ const PhotoList = ({ setPhotoSelected, handleLike, favorites, photos }) => {
           handleLike={handleLike}
           favorites={favorites}
           setPhotoSelected={setPhotoSelected}
+          handleOpenModal={handleOpenModal}
         />
       ))}
     </section>
