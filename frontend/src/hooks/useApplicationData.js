@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 
 const useApplicationData = () => {
@@ -11,25 +11,17 @@ const useApplicationData = () => {
     topicData: [],
     favorites: [],
     isFavPhotoExist: false,
+    selectedTopicId: null,
   };
-
-  useEffect(() => {
-    fetch("/api/photos")
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: 'SET_PHOTO_DATA', payload: data }));
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/topics")
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: 'SET_TOPIC_DATA', payload: data }));
-  }, []);
 
   const reducer = (state, action) => {
     switch (action.type) {
       case 'SET_PHOTO_DATA':
         return { ...state, photoData: action.payload };
-        case 'SET_TOPIC_DATA':
+      case 'SET_PHOTOS_BY_TOPIC':
+        console.log(action.payload)
+        return { ...state, photoData: action.payload.photos };
+      case 'SET_TOPIC_DATA':
         return { ...state, topicData: action.payload };
       case 'OPEN_MODAL':
         return { ...state, displayModal: true, selectedPhoto: action.payload };
@@ -49,6 +41,28 @@ const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: 'SET_PHOTO_DATA', payload: data }));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: 'SET_TOPIC_DATA', payload: data }));
+  }, []);
+
+  useEffect(() => {
+    if (state.selectedTopicId !== null) {
+      fetch(`/api/topics/photos/${state.selectedTopicId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch({ type: 'SET_PHOTOS_BY_TOPIC', payload: { topicId: selectedTopicId, photos: data } });
+        });
+    }
+  }, [state.selectedTopicId]);
+
   const setPhotoSelected = (photo) => {
     console.log("Selected photo:", photo);
     dispatch({ type: 'OPEN_MODAL', payload: photo });
@@ -63,8 +77,18 @@ const useApplicationData = () => {
     dispatch({ type: 'TOGGLE_LIKE', payload: photoId });
   };
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`/api/topics/photos/${topicId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: 'SET_PHOTOS_BY_TOPIC', payload: { topicId, photos: data } });
+      })
+      .catch((error) => console.error(error));
+  };
+
   const similarPhotos = state.selectedPhoto && state.selectedPhoto.similar_photos
-    ? state.photos.filter(photo => Object.values(state.selectedPhoto.similar_photos).includes(photo.id))
+    ? state.photoData.filter(photo => Object.values(state.selectedPhoto.similar_photos).includes(photo.id))
     : [];
 
 
@@ -73,6 +97,8 @@ const useApplicationData = () => {
     similarPhotos,
     isFavPhotoExist: state.isFavPhotoExist,
     displayModal: state.displayModal,
+    selectedTopicId: state.selectedTopicId,
+    fetchPhotosByTopic,
     setPhotoSelected,
     onClosePhotoDetailsModal: handleCloseModal,
     handleLike,

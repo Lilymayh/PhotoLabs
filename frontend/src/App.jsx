@@ -12,18 +12,18 @@ const App = () => {
     state,
     selectedPhoto,
     similarPhotos,
+    fetchPhotosByTopic,
     handleLike,
     setPhotoSelected,
     onClosePhotoDetailsModal
   } = useApplicationData();
 
-  const { photoData } = state;
-  const { topicData } = state;
+  const { photoData, topicData } = state;
 
   return (
     <Router>
       <div className="App">
-        <TopNavigation isFavPhotoExist={state.isFavPhotoExist} topicData={topicData}/>
+        <TopNavigation isFavPhotoExist={state.isFavPhotoExist} topicData={topicData} fetchPhotosByTopic={fetchPhotosByTopic} />
         <PhotoList
           photos={photoData}
           setPhotoSelected={setPhotoSelected}
@@ -42,8 +42,8 @@ const App = () => {
         }
         <Routes>
           <Route path="/" element={<HomeRoute photoData={photoData} topicData={topicData} favorites={state.favorites} />} />
-        </Routes>      
-        </div>
+        </Routes>
+      </div>
     </Router>
   );
 };
