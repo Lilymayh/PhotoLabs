@@ -21,33 +21,28 @@ const App = () => {
 
   const { photoData, topicData } = state;
 
-  console.log(selectedPhoto)
+  console.log(selectedPhoto);
   return (
-    <Router>
-      <div className="App">
-        <TopNavigation isFavPhotoExist={state.isFavPhotoExist} topicData={topicData} fetchPhotosByTopic={fetchPhotosByTopic} />
-        <PhotoList
-          photos={photoData}
-          handleOpenModal={handleOpenModal}
+    <div className="App">
+      <TopNavigation isFavPhotoExist={state.isFavPhotoExist} topicData={topicData} fetchPhotosByTopic={fetchPhotosByTopic} />
+      <PhotoList
+        photos={photoData}
+        handleOpenModal={handleOpenModal}
+        setPhotoSelected={setPhotoSelected}
+        favorites={state.favorites}
+        handleLike={handleLike}
+
+      />
+      {selectedPhoto &&
+        <PhotoDetailsModal
+          onClose={handleCloseModal}
+          photo={selectedPhoto}
           setPhotoSelected={setPhotoSelected}
+          similarPhotos={similarPhotos}
           favorites={state.favorites}
           handleLike={handleLike}
-          
-        />
-        {selectedPhoto &&
-          <PhotoDetailsModal
-            onClose={handleCloseModal}
-            photo={selectedPhoto}
-            setPhotoSelected={setPhotoSelected}
-            similarPhotos={similarPhotos}
-            favorites={state.favorites}
-            handleLike={handleLike}
-          />}
-        <Routes>
-          <Route path="/" element={<HomeRoute photoData={photoData} topicData={topicData} favorites={state.favorites} />} />
-        </Routes>
-      </div>
-    </Router>
+        />}
+    </div>
   );
 };
 

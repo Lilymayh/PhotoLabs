@@ -24,7 +24,7 @@ const useApplicationData = () => {
         return { ...state, topicData: action.payload };
       case 'OPEN_MODAL':
         return { ...state, displayModal: true, selectedPhoto: action.payload };
-        case 'CLOSE_MODAL':
+      case 'CLOSE_MODAL':
         return { ...state, displayModal: false, selectedPhoto: null };
       case 'TOGGLE_LIKE':
         const photoId = action.payload;
@@ -90,7 +90,7 @@ const useApplicationData = () => {
   const similarPhotos = state.selectedPhoto && state.selectedPhoto.similar_photos
     ? state.photoData.filter(photo => Object.values(state.selectedPhoto.similar_photos).includes(photo.id))
     : [];
-  
+
 
   return {
     state,
